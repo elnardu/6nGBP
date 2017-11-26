@@ -1,0 +1,49 @@
+type User {
+    id: ID!
+    fullname: String!
+    login: String!
+    admin: Boolean!
+
+    points: Int!
+    actions: [Action!]!
+}
+
+type Action {
+    id: ID!
+    category: Category
+    points: Int!
+    comment: String
+    date: Int!
+    user: User!
+    addedBy: User!
+}
+
+type Category {
+    id: ID!
+    title: String!
+    description: String!
+    points: Int!
+}
+
+type Query {
+    user(id: ID!): User
+    # users(search: String): [User!]!
+    users: [User!]!
+
+    auth(login: String!, password: String!): String
+    me: User
+
+    actions: [Action!]!
+    categories: [Category!]!
+}
+
+type Mutations {
+    createUser(fullname: String!, login: String!, password: String!): User
+    # updateUserInfo(id: ID!, fullname: String, email: String, password: String): User
+
+    addCategory(title: String!, description: String!, points: Int!): Category
+    # editCategory(id: ID, title: String, description: String, points: Int): Category
+
+    createAction(user: ID!, category: ID, points: Int, comment: String): Action
+    # editAction(id: ID!, user: ID, category: ID, points: Int, comment: String): Action
+}
