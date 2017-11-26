@@ -50,11 +50,14 @@ func (db *MyDB) RecalcPointsForUser(id *bson.ObjectId) error {
 }
 
 func (db *MyDB) AuthUser(login string, password string) (string, error) {
+	if login == "" || password == "" {
+		return "", errors.New("Invalid input")
+	}
 	result := types.User{}
 	db.C("users").Find(bson.M{"login": login}).One(&result)
 	var tokenString string
 	if result.Password != password {
-		return tokenString, errors.New("NOOOOOOPE, something wrong with your login or password")
+		return "", errors.New("NOOOOOOPE, something wrong with your login or password")
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
