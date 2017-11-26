@@ -58,9 +58,9 @@ export default {
 <style lang="scss">
 @import "node_modules/bulma/bulma";
 #app {
-  // width: 100vw;
-  // height: 100vh;
-  // margin: 0;
-  // padding: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 </style>

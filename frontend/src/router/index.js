@@ -5,6 +5,7 @@ import Dashboard from '@/components/Dashboard'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Profile from '@/components/Profile'
+import ApiExplorer from '@/components/ApiExplorer'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/apiexplorer',
+      name: 'ApiExplorer',
+      component: ApiExplorer
     }
   ]
 })
