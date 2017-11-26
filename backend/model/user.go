@@ -19,7 +19,7 @@ func (db *MyDB) GetUserByID(id *bson.ObjectId) *types.User {
 
 func (db *MyDB) GetUsers() *[]*types.User {
 	result := &[]*types.User{}
-	db.C("users").Find(bson.M{}).Sort("points").Limit(50).All(result)
+	db.C("users").Find(bson.M{}).Sort("-points").Limit(50).All(result)
 	return result
 }
 
