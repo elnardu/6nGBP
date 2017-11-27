@@ -18,6 +18,7 @@ WORKDIR /tmp/app
 RUN npm run build
 
 RUN mkdir -p /src/app && mv /tmp/app/dist /src/app
+RUN rm -rf /tmp/app
 
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
