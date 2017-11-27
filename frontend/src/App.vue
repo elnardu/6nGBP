@@ -21,7 +21,7 @@ export default {
   mounted() {
     if (localStorage.token) {
       this.$http
-        .post("/graphql", {
+        .post("/api/graphql", {
           query: `{ me { fullname } }`
         }, {
           headers: {

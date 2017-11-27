@@ -38,7 +38,7 @@ export default {
   methods: {
     doLogin() {
       this.loading = true;
-      this.$http.post("/graphql", {
+      this.$http.post("/api/graphql", {
         query:
           `query ($login: String!, $password: String!) {
             auth(login: $login, password: $password)

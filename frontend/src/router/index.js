@@ -10,6 +10,7 @@ import ApiExplorer from '@/components/ApiExplorer'
 Vue.use(Router)
 
 export default new Router({
+  // mode: process.env.NODE_ENV === 'production' ? 'history' : 'hash',
   routes: [
     {
       path: '/',

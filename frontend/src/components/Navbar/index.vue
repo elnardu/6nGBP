@@ -13,8 +13,6 @@
     <div class="navbar-menu" :class="{'is-active': navbarActive}">
       <div class="navbar-end">
         <router-link to="/dashboard" class="navbar-item" active-class="is-active">Dashboard</router-link>
-        <router-link v-if="!logged" to="/login" class="navbar-item" active-class="is-active">Login</router-link>
-        <router-link v-if="!logged" to="/register" class="navbar-item" active-class="is-active">Register</router-link>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             Other
@@ -26,6 +24,8 @@
             <a href="//github.com/elnardu/6nGBP" class="navbar-item" target="_blank">Source Code</a>
           </div>
         </div>
+        <router-link v-if="!logged" to="/login" class="navbar-item" active-class="is-active">Login</router-link>
+        <router-link v-if="!logged" to="/register" class="navbar-item" active-class="is-active">Register</router-link>
         <a v-if="logged" @click="logout" class="navbar-item">Logout</a>
       </div>
     </div>
@@ -51,7 +51,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 </style>
 

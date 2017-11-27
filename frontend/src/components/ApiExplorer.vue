@@ -1,6 +1,6 @@
 <template>
   <div class="api">
-    <iframe src="/graphql" frameborder="0"></iframe>
+    <iframe src="/api/graphql" frameborder="0"></iframe>
   </div>
 </template>
 

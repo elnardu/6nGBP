@@ -3,6 +3,7 @@ package model
 import (
 	"errors"
 	"log"
+	"os"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -66,7 +67,7 @@ func (db *MyDB) AuthUser(login string, password string) (string, error) {
 		"exp":   time.Now().Add(time.Hour * 48).Unix(),
 	})
 
-	tokenString, err := token.SignedString([]byte("lol kek cheburek"))
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
 	if err != nil {
 		log.Fatal(err)
 	}

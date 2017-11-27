@@ -1,9 +1,9 @@
 package main
 
 import (
-	"context"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/auth0/go-jwt-middleware"
 	jwt "github.com/dgrijalva/jwt-go"
@@ -41,20 +41,20 @@ func configureSchema() graphql.Schema {
 // 	}
 // }
 
-func addContext(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		authContext := map[string]interface{}{
-			"key1": 23,
-			"key2": "another value",
-		}
-		ctx := context.WithValue(r.Context(), "!@3", authContext)
-		next.ServeHTTP(w, r.WithContext(ctx))
-	})
-}
+// func addContext(next http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		authContext := map[string]interface{}{
+// 			"key1": 23,
+// 			"key2": "another value",
+// 		}
+// 		ctx := context.WithValue(r.Context(), "!@3", authContext)
+// 		next.ServeHTTP(w, r.WithContext(ctx))
+// 	})
+// }
 
 func main() {
 	log.Println("Starting server...")
-	model.NewDB("localhost")
+	model.NewDB("mongodb")
 	schema := configureSchema()
 
 	h := handler.New(&handler.Config{
@@ -65,13 +65,13 @@ func main() {
 
 	jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
-			return []byte("lol kek cheburek"), nil
+			return []byte(os.Getenv("SECRET")), nil
 		},
 		SigningMethod:       jwt.SigningMethodHS256,
 		CredentialsOptional: true,
 	})
 
-	http.Handle("/graphql", jwtMiddleware.Handler(h))
+	http.Handle("/api/graphql", jwtMiddleware.Handler(h))
 	// http.Handle("/graphql", handler(schema))
-	log.Fatal(http.ListenAndServe("localhost:8080", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -21,14 +21,14 @@ export default {
        return {
            loading: true,
            users: []
-       } 
+       }
     },
     mounted() {
         this.load()
     },
     methods: {
         load() {
-            this.$http.post('/graphql', {
+            this.$http.post('/api/graphql', {
                 query: `
                     {
                         users {
@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
 .box {
-    margin-left: 20px; 
-    margin-right: 20px; 
+    margin-left: 20px;
+    margin-right: 20px;
 }
 </style>
