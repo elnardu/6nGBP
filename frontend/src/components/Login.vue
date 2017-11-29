@@ -43,10 +43,10 @@ export default {
           `query ($login: String!, $password: String!) {
             auth(login: $login, password: $password)
           }`,
-          variables: {
-            login: this.login,
-            password: this.password
-          }
+        variables: {
+          login: this.login,
+          password: this.password
+        }
       }).then(res => {
         this.loading = false
         if (res.body.errors) {
