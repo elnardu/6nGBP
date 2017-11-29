@@ -9,6 +9,7 @@ RUN glide install && apk del glide git
 
 ARG secret
 ENV SECRET $secret
+ENV DBCONNECT $dbconnect
 
 ADD . .
 RUN go build -o myapp; mkdir /app/; cp myapp /app/

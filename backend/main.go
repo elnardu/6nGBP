@@ -54,7 +54,7 @@ func configureSchema() graphql.Schema {
 
 func main() {
 	log.Println("Starting server...")
-	model.NewDB("mongodb")
+	model.NewDB(os.Getenv("DBCONNECT"))
 	schema := configureSchema()
 
 	h := handler.New(&handler.Config{

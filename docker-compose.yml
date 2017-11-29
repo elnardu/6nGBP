@@ -15,6 +15,7 @@ services:
       dockerfile: ./Dockerfile
       args:
         secret: "SECRET"
+        dbconnect: "mongodb"
     links:
       - mongodb
 
