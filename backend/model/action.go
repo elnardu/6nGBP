@@ -16,12 +16,12 @@ func (db *MyDB) GetActionByID(id *bson.ObjectId) *types.Action {
 }
 func (db *MyDB) GetActions() *[]*types.Action {
 	result := &[]*types.Action{}
-	db.C("actions").Find(bson.M{}).Sort("date").Limit(20).All(result)
+	db.C("actions").Find(bson.M{}).Sort("-date").Limit(50).All(result)
 	return result
 }
 func (db *MyDB) GetActionsByUserID(id *bson.ObjectId) *[]*types.Action {
 	result := &[]*types.Action{}
-	db.C("actions").Find(bson.M{"userId": id}).Sort("date").Limit(20).All(result)
+	db.C("actions").Find(bson.M{"userId": id}).Sort("date").Limit(50).All(result)
 	return result
 }
 func (db *MyDB) CreateAction(action *types.Action) error {
