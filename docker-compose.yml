@@ -14,8 +14,8 @@ services:
       context: ./backend
       dockerfile: ./Dockerfile
       args:
-        secret: "SECRET"
-        dbconnect: "mongodb"
+        secret: SECRET
+        dbconnect: mongodb
     links:
       - mongodb
 

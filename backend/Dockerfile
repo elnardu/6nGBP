@@ -8,6 +8,7 @@ ADD glide.lock .
 RUN glide install && apk del glide git
 
 ARG secret
+ARG dbconnect
 ENV SECRET $secret
 ENV DBCONNECT $dbconnect
 
