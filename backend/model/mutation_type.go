@@ -28,11 +28,12 @@ var MutationType = graphql.NewObject(graphql.ObjectConfig{
 			},
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				user := &types.User{
-					Login:    p.Args["login"].(string),
-					Fullname: p.Args["fullname"].(string),
-					Password: p.Args["password"].(string), // yep, I am lazy
-					Points:   0,
-					Admin:    false,
+					Login:       p.Args["login"].(string),
+					Fullname:    p.Args["fullname"].(string),
+					Password:    p.Args["password"].(string), // yep, I am lazy
+					Points:      0,
+					PointsSpent: 0,
+					Admin:       false,
 				}
 				err := DB.CreateUser(user)
 				return user, err

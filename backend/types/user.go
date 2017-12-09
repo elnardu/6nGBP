@@ -6,10 +6,11 @@ import (
 
 // User user struct
 type User struct {
-	ID       bson.ObjectId `bson:"_id"`
-	Login    string        `bson:"login"`
-	Fullname string        `bson:"fullname"`
-	Admin    bool          `bson:"admin"`
-	Points   int           `bson:"points"`
-	Password string        `bson:"password"`
+	ID          bson.ObjectId `bson:"_id"`
+	Login       string        `bson:"login"`
+	Fullname    string        `bson:"fullname"`
+	Admin       bool          `bson:"admin"`
+	Points      int           `bson:"points"`
+	PointsSpent int           `bson:"pointsSpent"`
+	Password    string        `bson:"password"`
 }

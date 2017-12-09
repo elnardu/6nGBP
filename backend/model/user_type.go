@@ -20,7 +20,7 @@ var UserType = graphql.NewObject(graphql.ObjectConfig{
 			},
 		},
 		"login": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				if user, ok := p.Source.(*types.User); ok == true {
 					return user.Login, nil
@@ -29,7 +29,7 @@ var UserType = graphql.NewObject(graphql.ObjectConfig{
 			},
 		},
 		"fullname": &graphql.Field{
-			Type: graphql.String,
+			Type: graphql.NewNonNull(graphql.String),
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				if user, ok := p.Source.(*types.User); ok == true {
 					return user.Fullname, nil
@@ -51,6 +51,15 @@ var UserType = graphql.NewObject(graphql.ObjectConfig{
 			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 				if user, ok := p.Source.(*types.User); ok == true {
 					return user.Points, nil
+				}
+				return nil, nil
+			},
+		},
+		"pointsSpent": &graphql.Field{
+			Type: graphql.NewNonNull(graphql.Int),
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				if user, ok := p.Source.(*types.User); ok == true {
+					return user.PointsSpent, nil
 				}
 				return nil, nil
 			},
