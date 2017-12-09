@@ -54,6 +54,7 @@ func configureSchema() graphql.Schema {
 
 func main() {
 	log.Println("Starting server...")
+	log.Println("Database: " + os.Getenv("DBCONNECT"))
 	model.NewDB(os.Getenv("DBCONNECT"))
 	schema := configureSchema()
 
