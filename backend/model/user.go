@@ -20,7 +20,7 @@ func (db *MyDB) GetUserByID(id *bson.ObjectId) *types.User {
 
 func (db *MyDB) GetUsers() *[]*types.User {
 	result := &[]*types.User{}
-	db.C("users").Find(bson.M{}).Sort("-points").Limit(50).All(result)
+	db.C("users").Find(bson.M{}).Sort("-points").All(result)
 	return result
 }
 
@@ -28,7 +28,7 @@ func (db *MyDB) CreateUser(user *types.User) error {
 	user.ID = bson.NewObjectId()
 	err := db.C("users").Insert(user)
 	if err != nil && err.Error()[:6] == "E11000" {
-		return errors.New("You cannot use this login")
+		return errors.New("You cannot use this login or name")
 	}
 	return err
 }
@@ -79,7 +79,8 @@ func (db *MyDB) InitUsers() {
 	col := db.C("users")
 
 	nameIndex := mgo.Index{
-		Key: []string{"fullname"},
+		Key:    []string{"fullname"},
+		Unique: true,
 	}
 	err = col.EnsureIndex(nameIndex)
 	if err != nil {
