@@ -13,6 +13,8 @@
     <div class="navbar-menu" :class="{'is-active': navbarActive}">
       <div class="navbar-end">
         <router-link to="/dashboard" class="navbar-item" active-class="is-active">Dashboard</router-link>
+        <router-link v-if="logged" to="/profile" class="navbar-item" active-class="is-active">Profile</router-link>
+        <router-link v-if="admin" to="/editor" class="navbar-item" active-class="is-active">Editor</router-link>
         <router-link v-if="!logged" to="/login" class="navbar-item" active-class="is-active">Login</router-link>
         <router-link v-if="!logged" to="/register" class="navbar-item" active-class="is-active">Register</router-link>
         <div class="navbar-item has-dropdown is-hoverable">
@@ -34,18 +36,36 @@
 
 <script>
 export default {
-  props: ["logged"],
   data() {
     return {
-      navbarActive: false
+      navbarActive: false,
+      auth: this.$auth,
+      logged: false,
+      admin: false
     };
   },
+  mounted() {},
   methods: {
     toggleNavbar() {
       this.navbarActive = !this.navbarActive;
     },
     logout() {
-      this.$emit("logout");
+      this.$auth.logout()
+      this.$router.push('/')
+    }
+  },
+  watch: {
+    "auth.logged": {
+      handler: function() {
+        this.logged = this.$auth.logged;
+      },
+      deep: true
+    },
+    "auth.admin": {
+      handler: function() {
+        this.admin = this.$auth.admin;
+      },
+      deep: true
     }
   }
 };

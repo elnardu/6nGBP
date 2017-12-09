@@ -3,6 +3,7 @@
     <div class="columns is-centered">
       <div class="column is-narrow is-half">
         <div v-if="error" class="notification is-warning">{{ error }}</div>
+        <div v-if="$route.query.fr === 'true'" class="notification is-success">You can now login here</div>
         <form @submit.prevent="doLogin">
           <div class="field">
             <label class="label">Login</label>
@@ -55,7 +56,7 @@ export default {
           this.error = res.body.errors[0].message
           return
         }
-        this.$emit('token', res.body.data.auth)
+        this.$auth.setToken(res.body.data.auth)
         this.$router.push('/profile')
       })
     }

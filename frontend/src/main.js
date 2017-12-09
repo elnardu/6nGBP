@@ -3,11 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Auth from './auth'
 
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
 Vue.config.productionTip = false
+
+const auth = new Auth(Vue.http)
+Vue.prototype.$auth = auth
 
 /* eslint-disable no-new */
 new Vue({
