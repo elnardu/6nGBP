@@ -5,6 +5,7 @@ type User {
     admin: Boolean!
 
     points: Int!
+    pointsSpent: Int!
     actions: [Action!]!
 }
 
